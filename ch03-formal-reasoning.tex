@@ -1,0 +1,72 @@
+\section{Formal Reasoning as a Special Case}
+\label{sec:formal-reasoning}
+
+Classical first-order logic and probabilistic graphical models are usually
+presented as separate formalisms. The QBBN~\cite{coppola2024qbbn} unifies
+these: it is a probabilistic graphical model over propositions with AND/OR
+boolean structure, proven consistent and complete with respect to the
+first-order calculus. Logical deduction is the special case where the OR
+gate weights are deterministic; statistical inference is the general case
+where the weights are soft and learned from data.
+
+\subsection*{The Controlled/Learned Spectrum}
+
+This suggests a spectrum between controlled and learned reasoning:
+
+\begin{itemize}
+\item \textbf{Fully controlled}: OR gate weights are fixed to be
+deterministic. The system implements exact logical deduction. This is the
+QBBN in symbolic mode.
+
+\item \textbf{Fully learned}: OR gate weights are learned from data. The
+system implements soft probabilistic inference. This is the standard LLM.
+
+\item \textbf{Hybrid}: some weights are fixed (known logical rules) and
+some are learned (uncertain statistical relationships). This is the target
+architecture for systems combining flexibility with formal reliability.
+\end{itemize}
+
+The transformer's BP structure is compatible with all three modes. Current
+training produces the fully learned mode.
+
+\subsection*{The Completeness Connection --- and Its Limits}
+
+The QBBN paper proves consistency and completeness with respect to the
+first-order calculus. This is a result about \emph{representational
+expressivity}, not about practical inference capability. It says the QBBN
+can in principle express any first-order fact --- not that a transformer
+will reliably compute it, nor that inference will be tractable, nor that
+the right weights will be learned from data.
+
+Concretely: a transformer with grounded BP weights is not thereby guaranteed
+to do mathematics reliably. Mathematical reasoning requires not just the
+right representational structure but also the right weights, sufficient
+layers for the required inference depth, and a training procedure that
+produces calibrated beliefs. The completeness result says the architecture
+is not the bottleneck. It does not say the other bottlenecks are easy.
+
+\subsection*{Fast vs.\ Slow Reasoning}
+
+The QBBN analysis connects to Kahneman's fast/slow
+distinction~\cite{kahneman2011thinking}. Fast reasoning is forward
+inference: causes propagate to effects in one pass of BP. Slow reasoning
+requires reasoning by cases --- exploring multiple hypotheses, maintaining
+multiple belief states, backtracking. The number of transformer layers
+bounds the depth of fast reasoning; slow reasoning requires iteration or
+explicit search outside the model.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+QBBN is consistent and complete w.r.t.\ first-order logic & Formal theorem \\
+Transformers are compatible with formal reasoning & Direct consequence \\
+Trained transformers reliably do formal reasoning & Not established \\
+Completeness implies practical mathematical competence & Explicitly not claimed \\
+Hybrid architecture is achievable & Architectural proposal \\
+\bottomrule
+\end{tabular}
+\end{center}

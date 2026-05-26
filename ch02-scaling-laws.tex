@@ -1,0 +1,42 @@
+\section{Scaling Laws Have a Mechanistic Interpretation}
+\label{sec:scaling-laws}
+
+Kaplan et al.\ and subsequent work established that loss scales predictably
+as a power law with compute, parameters, and data~\cite{kaplan2020scaling}.
+This is an empirical regularity. No principled derivation of the exponents
+has been established, though several theoretical programs have attempted
+partial accounts.
+
+\subsection*{The BP Interpretation}
+
+Under the BP interpretation, scaling adds inference capacity in well-defined
+ways: more layers add rounds of BP, more $D_{ff}$ adds OR gate capacity,
+more $D_{\mathrm{model}}$ adds superposition capacity, and more $W$ adds
+factor graph nodes. Each of these is a smooth, monotone increase in a
+well-defined quantity. Power-law scaling in loss is qualitatively consistent
+with a system where each additional unit of capacity provides diminishing
+but consistent marginal improvement in inference quality over a fixed
+distribution.
+
+\subsection*{The AND Head Invariant}
+
+Empirically, boolean-AND head count stays roughly fixed within a model
+family while hub and OR capacity scales. This is consistent with the BP
+interpretation: the routing primitive is compact and does not need to scale,
+while inference capacity does. This evidence is preliminary --- three model
+families --- and should not be overstated.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Scaling dimensions have BP interpretations & Mechanistic interpretation \\
+More layers enable deeper reasoning chains & Mechanistic interpretation \\
+AND head invariance is consistent with BP & Empirical observation (preliminary) \\
+BP explains power-law exponents & Not established \\
+\bottomrule
+\end{tabular}
+\end{center}

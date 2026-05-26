@@ -1,0 +1,40 @@
+\section{Sparse Inference and Pruning}
+\label{sec:efficiency}
+
+The implicit factor graph is sparse: each node has only a few neighbors,
+and most conditional relationships are zero or near-zero. If the sparse
+factor graph structure can be identified --- which SAE features matter for
+a given task, which AND connections are active, which OR gates are relevant
+--- the rest can be skipped. This is structured pruning with a theoretical
+justification.
+
+\subsection*{Task-Specific Factor Graphs}
+
+Different tasks activate different subgraphs of the implicit factor graph.
+This is the theoretical foundation for mixture-of-experts and sparse
+attention: they are approximations to task-specific factor graph routing,
+and the BP framework gives a principled account of what they are
+approximating.
+
+\subsection*{Distillation as Factor Graph Compression}
+
+Knowledge distillation can be understood as factor graph compression:
+finding a smaller factor graph that approximates the posteriors of the
+larger one. The BP framework gives a principled objective for distillation:
+minimize KL divergence between the posteriors of the teacher and student
+factor graphs, not just between their output distributions.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Implicit factor graph is sparse & Mechanistic interpretation \\
+Task-specific subgraph activation motivates sparse computation & Mechanistic interpretation \\
+MoE approximates task-specific factor graph routing & Mechanistic interpretation \\
+Distillation as factor graph compression & Architectural proposal \\
+\bottomrule
+\end{tabular}
+\end{center}

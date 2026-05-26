@@ -1,0 +1,43 @@
+\section{Research Roadmap}
+\label{sec:roadmap}
+
+The BP interpretation of transformers is an active empirical program, not
+a finished doctrine. The open research directions divide into three tiers
+by tractability.
+
+\subsection*{Tier 1 --- Most Directly Testable}
+
+\textbf{Recover factor graphs from SAEs.} For each boolean-AND head, project
+the Q/K matrix onto the SAE feature basis and check if the dominant
+component corresponds to a monosemantic feature. Check if the V circuit
+routes from a belief dimension to a scratch slot.
+
+\textbf{Test layer-wise belief convergence.} Train a tiny transformer on a
+synthetic Bayes net with known ground-truth posteriors. Measure how closely
+the residual stream at each layer matches the BP belief after that many
+rounds of message passing.
+
+\textbf{Measure calibration by layer depth.} Compare output calibration of
+models with different depths on multi-step reasoning tasks. If deeper models
+are better calibrated on longer chains, that supports the
+layers-as-BP-rounds account.
+
+\subsection*{Tier 2 --- Requires New Infrastructure}
+
+Complete SAE coverage of a production model. Build and benchmark a grounded
+transformer + QBBN hybrid. Develop a calibration benchmark for BP
+consistency that measures layer-wise belief stability.
+
+\subsection*{Tier 3 --- Longer-Term}
+
+Learning grounded factor graphs from text via expectation maximization.
+Formal account of in-context learning as BP. Multi-agent BP convergence
+conditions.
+
+\subsection*{What Would Most Advance the Program}
+
+In order of expected impact: (1) the SAE factor graph recovery experiment,
+which closes the loop between the formal theorem and trained models; (2)
+layer-wise convergence measurement, which tests the layers-as-rounds claim
+directly; and (3) the grounded hybrid system benchmark, which demonstrates
+the practical value of grounding.

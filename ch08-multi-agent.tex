@@ -1,0 +1,43 @@
+\section{Multi-Agent Systems and Distributed Inference}
+\label{sec:multi-agent}
+
+If each agent is performing BP over its local factor graph, then a
+multi-agent system can be interpreted as a distributed inference computation
+over a larger global factor graph. This resembles loopy belief propagation
+on a graph too large to fit in a single model.
+
+This is an interpretive framework, not a proven equivalence. Real LLM
+agents are not calibrated BP nodes. Communication between agents is lossy
+text, not exact belief messages. The convergence guarantees from formal
+loopy BP do not transfer directly to multi-agent LLM systems.
+
+\subsection*{What the BP Lens Suggests}
+
+Even without exact equivalence, the distributed BP framing suggests useful
+design principles: agent boundaries may work better when aligned with factor
+graph structure; message formats carrying structured uncertainty may
+coordinate better than raw text; convergence criteria inspired by BP belief
+stability could inform stopping rules for multi-agent deliberation.
+
+\subsection*{What Would Be Required for a Formal Account}
+
+For the distributed BP interpretation to become a formal account, agents
+would need to maintain calibrated beliefs over a shared declared factor
+graph, pass approximately correct belief messages, update beliefs according
+to BP rules, and operate over a graph structure where loopy BP converges.
+None of these conditions hold for current LLM multi-agent systems.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Multi-agent systems resemble distributed BP & Mechanistic interpretation \\
+BP lens suggests useful design principles & Architectural proposal \\
+Current LLM agents converge to correct posteriors & Not supported \\
+BP-inspired coordination protocols may help & Speculative hypothesis \\
+\bottomrule
+\end{tabular}
+\end{center}
