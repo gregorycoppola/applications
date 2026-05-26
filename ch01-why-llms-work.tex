@@ -12,10 +12,10 @@ computing.
 \subsection*{The BP Interpretation}
 
 If transformers implement belief propagation over an implicit factor graph,
-then next-token prediction can be interpreted as marginal inference in a
-Bayesian network over language concepts. Under this interpretation, the
-model behaves as though it is learning a structured probabilistic model of
-the world and performing inference in it.
+then next-token prediction admits a Bayes-net interpretation: each forward
+pass can be modeled as marginal inference in a Bayesian network over
+language concepts, with the model behaving as though it is learning a
+structured probabilistic model of the world and performing inference in it.
 
 This suggests a mechanistic account of what the model is computing: each
 forward pass propagates beliefs through an implicit factor graph, updating
@@ -62,7 +62,7 @@ Claim & Status \\
 \midrule
 Sigmoid transformers can implement BP & Formal theorem \\
 Trained LLMs implement BP & Empirical hypothesis \\
-Next-token prediction fits a Bayes net & Mechanistic interpretation \\
+Next-token prediction admits a Bayes-net interpretation & Mechanistic interpretation \\
 Scaling expands BP inference capacity & Mechanistic interpretation \\
 BP explains power-law scaling exponents & Not established \\
 \bottomrule
