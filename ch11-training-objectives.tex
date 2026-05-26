@@ -3,9 +3,11 @@
 
 Next-token prediction optimizes cross-entropy loss on the training
 distribution. This is equivalent to maximum likelihood estimation of the
-implicit factor graph parameters. The bayes-learner experiment confirms
-that gradient descent finds approximately correct BP weights from this
-objective (val MAE 0.000752).
+implicit factor graph parameters. In synthetic experiments, gradient
+descent recovered approximately BP-like solutions from this objective:
+the bayes-learner experiment on a known Bayesian network structure found
+weights with val MAE 0.000752. Whether this extends to arbitrary
+architectures, scales, and distributions is an open question.
 
 \subsection*{Alternative Objectives}
 
@@ -39,7 +41,8 @@ current training objectives approach it.
 \toprule
 Claim & Status \\
 \midrule
-Gradient descent finds approximate BP weights & Empirical observation \\
+Gradient descent found approx.\ BP weights in synthetic experiments & Empirical observation \\
+This extends to production models generally & Not established \\
 Calibration objectives would improve reliability & Architectural proposal \\
 BP consistency training would enforce layer-wise calibration & Architectural proposal \\
 Uniqueness theorem gives a well-defined training target & Direct consequence \\

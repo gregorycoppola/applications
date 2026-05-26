@@ -21,7 +21,13 @@ unit should be interpretable as a conditional probability table entry.
 \end{itemize}
 
 These are specific structural claims that can be confirmed or falsified by
-inspecting the weights of a trained model with a good SAE.
+inspecting the weights of a trained model with a good SAE. The head
+classification results across GPT-2 small, GPT-2 medium, and Qwen~2.5 0.5B
+suggest that a substantial fraction of heads across these model families
+fall into the boolean-AND, hub, and continuous-OR categories predicted by
+the BP framework. The classification methodology uses unsupervised
+attention-pattern analysis over 88 prompts; reproducibility and
+generalization to other model families remain to be established.
 
 \subsection*{What a Negative Result Would Mean}
 
@@ -37,7 +43,8 @@ Project the Q/K matrix onto the SAE feature basis. Check if the dominant
 component corresponds to a monosemantic feature. Check if the V circuit
 routes from a belief dimension to a scratch slot. Check if input/output SAE
 feature pairs for active FFN units are interpretable as conditional
-relationships. If this succeeds, the implicit factor graph is legible.
+relationships. If this succeeds, the implicit factor graph is partially
+legible from the weights.
 
 \subsection*{Epistemic Status}
 
@@ -47,9 +54,10 @@ relationships. If this succeeds, the implicit factor graph is legible.
 Claim & Status \\
 \midrule
 BP predicts rank-1 Q/K structure in AND heads & Empirical hypothesis \\
-SAE features correspond to factor graph nodes & Empirical hypothesis \\
-Factor graph is legible from weights + SAE & Empirical hypothesis \\
-Negative SAE result would falsify BP account & Direct consequence \\
+SAE features are natural candidates for factor graph nodes & Empirical hypothesis \\
+Substantial fraction of heads fit BP taxonomy & Empirical observation (3 models) \\
+Factor graph is partially legible from weights + SAE & Empirical hypothesis \\
+Negative SAE result would falsify BP account for AND heads & Direct consequence \\
 \bottomrule
 \end{tabular}
 \end{center}
