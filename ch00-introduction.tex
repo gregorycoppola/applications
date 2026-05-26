@@ -3,16 +3,15 @@
 
 The companion paper~\cite{coppola2026transformers} proves that a sigmoid
 transformer can exactly realize belief propagation (BP) under a constructive
-weight mapping. This is not a loose analogy or a high-level functional
-similarity: the forward pass implements the BP update equations directly,
-with residual streams as belief states, attention as evidence gathering, and
-feed-forward networks as belief updates.
+weight mapping. Within the constructive setting, the forward pass implements
+the BP update equations directly, with residual streams as belief states,
+attention as evidence gathering, and feed-forward networks as belief updates.
 
 The present paper asks: what follows from taking that result seriously? The
 applications range from theoretical (a mechanistic account of why LLMs work)
-to practical (grounding strategies, interpretability predictions, agent
-design) to open research directions (calibrated uncertainty, factor graph
-recovery, grounded planning systems).
+to practical (grounding strategies, interpretability predictions, agent design)
+to open research directions (calibrated uncertainty, factor graph recovery,
+grounded planning systems).
 
 \subsection*{Levels of Analysis}
 
@@ -25,7 +24,7 @@ should not be conflated:
 Level & Description & Example \\
 \midrule
 Exact constructive & Formally verified theorem & Sigmoid transformer realizes exact BP \\
-Direct consequence & Follows from the theorem & Grounded BP has no hallucination \\
+Direct consequence & Follows from the theorem & Grounded BP permits verifiable correctness \\
 Mechanistic interpretation & Component-level account & Attention = evidence gathering \\
 Empirical hypothesis & Testable prediction & AND heads have rank-1 Q/K circuits \\
 Architectural proposal & Design suggestion & Grounded transformer + QBBN hybrid \\
@@ -38,7 +37,7 @@ Each section marks the epistemic status of its claims explicitly.
 
 \subsection*{Map of Literatures}
 
-Five independent research programs have converged on related pictures of
+Several independent research programs have converged on related pictures of
 transformer computation. The BP result provides a common language for
 organizing their findings:
 

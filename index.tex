@@ -21,14 +21,15 @@
 The companion paper~\cite{coppola2026transformers} proves that a sigmoid
 transformer can exactly realize belief propagation under a constructive
 weight mapping. This paper develops the applications and implications of
-that result. We organize them across six domains: theoretical foundations
-(why LLMs work, scaling laws, formal reasoning), grounding and hallucination,
-agents and planning, mechanistic interpretability, training objectives, and
-efficiency. Each application is marked by its epistemic status --- formal
-consequence, mechanistic interpretation, empirical hypothesis, architectural
-proposal, or speculative extension --- so that the reader can calibrate
-confidence accordingly. The paper concludes with an explicit account of
-what the theory does not prove and a research roadmap for the open problems.
+that result. We organize them across seven domains: theoretical foundations
+(why LLMs work, in-context learning, scaling laws, formal reasoning),
+grounding and hallucination, agents and planning, mechanistic
+interpretability, training objectives, efficiency, and limitations. Each
+application is marked by its epistemic status --- formal consequence,
+mechanistic interpretation, empirical hypothesis, architectural proposal,
+or speculative extension --- so that the reader can calibrate confidence
+accordingly. The paper concludes with an explicit account of what the
+theory does not prove and a research roadmap for the open problems.
 \end{abstract}
 \tableofcontents
 \newpage
@@ -36,6 +37,7 @@ what the theory does not prove and a research roadmap for the open problems.
 \input{ch00-introduction}
 \part{Theoretical Consequences}
 \input{ch01-why-llms-work}
+\input{ch01b-icl}
 \input{ch02-scaling-laws}
 \input{ch03-formal-reasoning}
 \part{Grounding and Hallucination}

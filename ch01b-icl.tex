@@ -1,0 +1,62 @@
+\section{In-Context Learning as Online Belief Propagation}
+\label{sec:icl}
+
+In-context learning (ICL) is the phenomenon that a transformer, given a
+few examples in the prompt, performs a new task without any weight updates.
+This is empirically reliable and practically important, but lacks a
+consensus mechanistic explanation.
+
+\subsection*{The BP Interpretation}
+
+Under the BP interpretation, in-context learning is online Bayesian
+updating. Each in-context example is additional evidence injected into the
+implicit factor graph. The forward pass at each new token is one round of
+message passing that conditions the current belief state on the accumulating
+evidence. The context window is not just a memory buffer --- it is the
+evidence base over which inference is performed.
+
+This gives a natural account of several ICL phenomena. Performance improves
+with more examples because more evidence tightens the posterior. Performance
+improves with more layers because more layers means more rounds of BP,
+allowing the evidence to propagate further through the factor graph. Tasks
+that are easy for ICL are tasks where the relevant factor graph is simple
+enough that a few examples suffice to identify the correct posterior.
+
+Xie et al.~\cite{xie2022icl} propose a related Bayesian account of ICL at
+the population level: the model maintains a posterior over latent document
+concepts and updates it as it sees more examples. The BP account is the
+mechanistic complement: each forward pass is one round of BP on the implicit
+factor graph, and ICL works because the factor graph encodes the conditional
+relationships learned from training.
+
+\subsection*{What This Predicts}
+
+If ICL is BP-based inference, then:
+
+\begin{itemize}
+\item ICL performance on a task should improve with model depth, up to the
+point where the factor graph converges --- and then plateau.
+\item On synthetic tasks with known factor graph structure, ICL performance
+should track the convergence of BP on that graph.
+\item Tasks requiring many inference hops should benefit more from depth
+than tasks requiring few.
+\item ICL should fail on tasks whose factor graph structure is not
+representable within the model's implicit graph --- not just tasks that
+are ``too hard.''
+\end{itemize}
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+ICL is consistent with online Bayesian updating & Mechanistic interpretation \\
+Each in-context example injects evidence into the factor graph & Mechanistic interpretation \\
+ICL performance tracks BP convergence on synthetic graphs & Empirical hypothesis \\
+Depth improves ICL via more inference rounds & Empirical hypothesis \\
+Population-level Bayesian ICL account~\cite{xie2022icl} & External empirical result \\
+\bottomrule
+\end{tabular}
+\end{center}

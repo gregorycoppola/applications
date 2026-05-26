@@ -33,6 +33,32 @@ declared ontology and verifier). This is the QBBN program. Whether it can
 be scaled to general-purpose language understanding is the central open
 problem.
 
+\subsection*{RAG and Tool Use as Partial Grounding}
+
+Retrieval-augmented generation~\cite{lewis2020rag} and tool use can be
+understood as dynamically extending the factor graph at inference time.
+Retrieved documents or tool outputs become additional evidence nodes
+injected into the residual stream via attention. The transformer then
+performs the gather-update cycle over this augmented graph.
+
+When retrieval is grounded --- the documents are mapped into a declared
+ontology --- the formal verifiability result applies to the extended graph.
+Ungrounded retrieval still helps empirically by temporarily constraining
+the inference space, but cannot provide formal verifiability.
+
+This framing explains both the success of RAG and its remaining failure
+modes. Hallucinated retrieval corresponds to injecting incorrect evidence
+into the factor graph: the inference is locally valid but the premises are
+wrong. Context-window overflow corresponds to a factor graph too large for
+the available inference rounds. Noisy or irrelevant retrieved documents
+correspond to weak or misleading evidence nodes that pull the posterior
+away from the correct answer.
+
+Grounded retrieval --- where retrieved content is parsed into declared
+propositions in a QBBN ontology before being injected --- would eliminate
+these failure modes in principle. It is an architectural proposal, not a
+deployed system.
+
 \subsection*{Epistemic Status}
 
 \begin{center}
@@ -44,6 +70,9 @@ Two kinds of reliability are distinct & Conceptual distinction \\
 Grounded BP systems have formal verifiability & Direct consequence \\
 Scaling reliably improves all reliability metrics & Explicitly not claimed \\
 Scaling does not close the grounding gap & Mechanistic interpretation \\
+RAG is partial grounding via evidence injection & Mechanistic interpretation \\
+RAG failure modes follow from ungrounded evidence & Mechanistic interpretation \\
+Grounded retrieval would provide formal verifiability & Architectural proposal \\
 QBBN hybrid closes the gap & Architectural proposal \\
 \bottomrule
 \end{tabular}
