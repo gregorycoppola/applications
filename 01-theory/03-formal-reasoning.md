@@ -18,68 +18,77 @@ where the weights are soft and learned from data.
 ## What This Means for Transformers
 
 If transformers implement BP, and BP over a QBBN subsumes logical deduction
-as a special case, then transformers already have the computational
-architecture for formal reasoning built in. The question is not whether the
-architecture supports logical inference — it does, by construction. The
-question is whether the weights are trained to implement crisp logical rules
-or soft statistical ones.
+as a special case, then transformers have the computational architecture
+that could support formal reasoning. The question is whether the weights are
+trained to implement crisp logical rules or soft statistical ones.
 
 A transformer trained on mathematics or formal proofs is learning weights
-that push the OR gates toward deterministic behavior. The same architecture
-that does soft probabilistic inference over natural language is doing
-something closer to logical deduction over formal notation. The architecture
-is the same; the weight regime differs.
+that push the OR gates toward more deterministic behavior. The same
+architecture that does soft probabilistic inference over natural language
+may do something closer to logical deduction over formal notation. The
+architecture is the same; the weight regime differs.
 
 ## Controlled vs. Learned Reasoning
 
-This gives a precise account of the spectrum between "controlled" and
-"learned" reasoning:
+This suggests a spectrum between "controlled" and "learned" reasoning:
 
 - **Fully controlled**: OR gate weights are fixed to be deterministic. The
-  system implements exact logical deduction. No hallucination is possible
-  because the factor potentials are specified, not learned. This is the
-  QBBN in symbolic mode.
+  system implements exact logical deduction. This is the QBBN in symbolic
+  mode.
 
 - **Fully learned**: OR gate weights are learned from data. The system
-  implements soft probabilistic inference. Hallucination is possible when
-  the learned weights diverge from the true posteriors. This is the standard
-  LLM.
+  implements soft probabilistic inference. This is the standard LLM.
 
 - **Hybrid**: some weights are fixed (known logical rules) and some are
-  learned (uncertain statistical relationships). The system does principled
-  inference that is partially grounded in formal logic and partially learned
-  from data. This is the target architecture for reliable AI systems.
+  learned (uncertain statistical relationships). This is the target
+  architecture for systems that combine flexibility with formal reliability.
 
-The transformer's BP structure supports all three modes. Current training
-produces the fully learned mode. The grounding program is about moving
-toward the hybrid mode.
+The transformer's BP structure is compatible with all three modes. Current
+training produces the fully learned mode. The grounding program is about
+moving toward the hybrid mode.
 
-## The Completeness Connection
+## The Completeness Connection — and Its Limits
 
 The QBBN paper proves consistency and completeness with respect to the
 first-order calculus: whatever is provable in first-order logic is provable
 in the QBBN, and whatever the QBBN proves is consistent with first-order
-logic. This means the QBBN — and by extension, a transformer with the right
-weights — can in principle express any mathematical or scientific fact that
-can be expressed in first-order logic.
+logic.
 
-This is a strong result. It means the architecture is not a limitation.
-A transformer with grounded BP weights is not limited to pattern matching
-over surface forms — it is capable of exact logical deduction over any
-domain that can be expressed in first-order terms. The limitation of current
-LLMs is not architectural; it is a matter of training and grounding.
+This is a result about *representational expressivity*, not about practical
+inference capability. It says the QBBN can in principle express any
+first-order fact — not that a transformer will reliably compute it, nor that
+inference will be tractable, nor that the right weights will be learned from
+data. The gap between "can represent" and "will reliably compute" is large
+and not closed by the completeness result.
+
+Concretely: a transformer with grounded BP weights is not thereby guaranteed
+to do mathematics reliably. Mathematical reasoning requires not just the
+right representational structure but also the right weights, sufficient
+layers for the required inference depth, and a training procedure that
+produces calibrated beliefs. The completeness result says the architecture
+is not the bottleneck. It does not say the other bottlenecks are easy.
 
 ## Fast vs. Slow Reasoning
 
-The QBBN analysis connects directly to Kahneman's fast/slow distinction.
-Fast reasoning is forward inference: causes propagate to effects in one
-pass of BP. Slow reasoning requires reasoning by cases — exploring multiple
-hypotheses, maintaining multiple belief states, backtracking. The number
-of transformer layers bounds the depth of fast reasoning; slow reasoning
+The QBBN analysis connects to Kahneman's fast/slow distinction. Fast
+reasoning is forward inference: causes propagate to effects in one pass of
+BP. Slow reasoning requires reasoning by cases — exploring multiple
+hypotheses, maintaining multiple belief states, backtracking. The number of
+transformer layers bounds the depth of fast reasoning; slow reasoning
 requires iteration or explicit search outside the model.
 
-This gives a formal account of why LLMs are good at fast pattern-based
-responses and struggle with multi-step deduction that requires maintaining
-and revising hypotheses across many steps. It is not a fundamental
-limitation of the BP architecture — it is a limitation of running a fixed
-number of forward passes without an outer search loop.
+This suggests why LLMs handle fast pattern-based responses well and struggle
+with multi-step deduction requiring maintained hypotheses. It is not a
+fundamental limitation of the BP architecture — it is a limitation of
+running a fixed number of forward passes without an outer search loop.
+
+## Status of the Claims
+
+| Claim | Status |
+|---|---|
+| QBBN is consistent and complete w.r.t. first-order logic | Formal theorem (QBBN paper) |
+| Transformers have architecture compatible with formal reasoning | Direct consequence |
+| Trained transformers reliably do formal reasoning | Not established |
+| Completeness implies practical mathematical competence | Explicitly not claimed |
+| Hybrid controlled/learned architecture is achievable | Architectural proposal |
+| Fast/slow distinction maps onto BP rounds | Mechanistic interpretation |
