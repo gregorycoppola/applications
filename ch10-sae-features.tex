@@ -7,23 +7,29 @@ relationships via superposition, and a single factor relationship may
 require multiple hidden units to implement accurately with non-sigmoid
 activations.
 
-The right unit is the SAE feature. Each monosemantic SAE feature ---
-one that activates for a single coherent concept --- corresponds to one
-node in the implicit factor graph. The feature direction in residual stream
-space is where the belief value for that concept lives.
+The natural candidates for factor graph nodes are SAE features.
+Each monosemantic SAE feature --- one that activates for a single coherent
+concept --- is a natural candidate for one node in the implicit factor
+graph, with its activation value encoding the belief at that node. This
+is a hypothesis, not a proven correspondence: SAE features may themselves
+be mixtures, basis artifacts, or local linear approximations rather than
+clean factor graph nodes.
 
-\subsection*{The Factor Graph is Readable in Principle}
+\subsection*{Toward Partial Factor Graph Recovery}
 
-Given a complete SAE, the full implicit factor graph is readable in
-principle: factor graph nodes are monosemantic SAE features; edges are $W_1$
-rows that respond to pairs of input features whose $W_2$ columns write to
-output features; factor potentials are the learned weights connecting input
-to output features.
+The BP interpretation suggests a pathway toward partial factor graph
+recovery. Given a sufficiently complete SAE, factor graph nodes would
+correspond to monosemantic SAE features; edges would be identifiable from
+$W_1$ rows that respond to pairs of input features whose $W_2$ columns
+write to output features; and factor potentials would be the learned
+weights connecting input to output features.
 
 Current SAEs cover a small fraction of the residual stream's
-representational capacity. As coverage improves, the factor graph becomes
-more legible. The BP result gives interpretability research a specific
-target: complete the SAE, then read the graph.
+representational capacity. The factor graph may also be distributed,
+redundant, or dynamically contextual in ways that make complete recovery
+difficult even in principle. As SAE coverage improves, partial recovery
+becomes more tractable. The BP result gives interpretability research a
+specific target and a specific prediction to test.
 
 \subsection*{Epistemic Status}
 
@@ -32,9 +38,10 @@ target: complete the SAE, then read the graph.
 \toprule
 Claim & Status \\
 \midrule
-SAE features correspond to factor graph nodes & Empirical hypothesis \\
-Factor graph edges are readable from W1/W2 & Empirical hypothesis \\
-Complete SAE would make factor graph legible & Architectural proposal \\
+SAE features are natural candidates for factor graph nodes & Empirical hypothesis \\
+Monosemantic features correspond exactly to BP nodes & Not established \\
+Partial factor graph recovery is possible in principle & Empirical hypothesis \\
+Complete recovery is straightforward given better SAEs & Explicitly not claimed \\
 Golden Gate Claude demonstrates evidence injection & Empirical observation \\
 \bottomrule
 \end{tabular}
