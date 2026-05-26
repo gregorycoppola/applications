@@ -1,4 +1,4 @@
-# Multi-Agent Systems as Distributed BP
+# Multi-Agent Systems and Distributed Inference
 
 ## The Problem with Multi-Agent Coordination
 
@@ -7,35 +7,61 @@ send text to each other and update their behavior. This is described
 functionally but has no formal account of what the coordination is
 computing or whether it converges to a correct answer.
 
-## Distributed BP as the Model
+## Distributed BP as a Conceptual Model
 
 If each agent is performing BP over its local factor graph, then a
-multi-agent system is a distributed BP computation over a larger global
-factor graph. The agents are nodes in a higher-level factor graph. Their
-messages to each other are belief messages between nodes.
+multi-agent system can be interpreted as a distributed inference computation
+over a larger global factor graph. The agents are nodes in a higher-level
+factor graph. Their messages to each other are, conceptually, belief
+messages between nodes.
 
-This is exactly the structure of loopy belief propagation on a graph too
-large to fit in a single model. The global inference problem is decomposed
-into local subproblems, each handled by one agent, with coordination
-happening through message passing between agents.
+This resembles loopy belief propagation on a graph too large to fit in a
+single model: the global inference problem is decomposed into local
+subproblems, each handled by one agent, with coordination happening through
+message passing between agents.
 
-## Convergence and Correctness
+This is an interpretive framework, not a proven equivalence. Real LLM
+agents are not calibrated BP nodes. Communication between agents is lossy
+text, not exact belief messages. Prompts mutate beliefs in ways that are
+not equivalent to clean factor graph updates. The convergence guarantees
+from formal loopy BP do not transfer directly to multi-agent LLM systems.
 
-Loopy BP does not always converge, but in practice it converges on most
-graph structures that arise in real problems. The empirical result from the
-loopy repository — 100% convergence across 500 trials on five loopy graph
-structures, mean KL divergence below 0.0002 — suggests the gap between
-theory and practice is small.
+## What the BP Lens Suggests
 
-For multi-agent systems, this means: if the agents are running BP locally
-and passing beliefs correctly, the system converges to approximately correct
-global posteriors. Coordination is not magic — it is distributed inference.
+Even without exact equivalence, the distributed BP framing suggests useful
+design principles:
 
-## Implications for Agent Design
+- Agent boundaries may work better when they align with natural factor
+  graph structure — agents that share many relevant factor connections
+  should communicate more
+- Message formats that carry structured belief-like information (confidence
+  estimates, explicit uncertainty) may coordinate better than raw text
+- Convergence criteria inspired by BP belief stability could inform
+  stopping rules for multi-agent deliberation
 
-- Agent boundaries should align with factor graph structure: agents that
-  share many factor connections should communicate more
-- Message formats between agents should carry calibrated beliefs, not just
-  text
-- Convergence criteria for multi-agent reasoning can be defined formally
-  in terms of belief stability across agents
+These are architectural suggestions motivated by the framework, not
+consequences of the formal theorem.
+
+## What Would Be Required for a Formal Account
+
+For the distributed BP interpretation to become a formal account rather
+than an analogy, agents would need to:
+
+- Maintain calibrated beliefs over a shared, declared factor graph
+- Pass exact or approximately correct belief messages, not free-form text
+- Update beliefs according to BP message passing rules
+- Operate over a graph structure where loopy BP is known to converge
+
+None of these conditions hold for current LLM multi-agent systems. The
+distributed BP framing is useful for thinking about coordination design,
+not for making convergence guarantees about existing systems.
+
+## Status of the Claims
+
+| Claim | Status |
+|---|---|
+| Multi-agent systems resemble distributed BP | Mechanistic interpretation |
+| BP lens suggests useful design principles | Architectural proposal |
+| Current LLM agents converge to correct posteriors | Not supported |
+| Formal convergence requires calibrated agents | Direct consequence of BP theory |
+| BP-inspired coordination protocols may help | Speculative hypothesis |
