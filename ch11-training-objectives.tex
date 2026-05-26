@@ -1,0 +1,48 @@
+\section{Training Objectives Through the BP Lens}
+\label{sec:training}
+
+Next-token prediction optimizes cross-entropy loss on the training
+distribution. This is equivalent to maximum likelihood estimation of the
+implicit factor graph parameters. The bayes-learner experiment confirms
+that gradient descent finds approximately correct BP weights from this
+objective (val MAE 0.000752).
+
+\subsection*{Alternative Objectives}
+
+The BP framework suggests objectives that would produce better-calibrated
+Bayes nets:
+
+\begin{itemize}
+\item \textbf{Calibration objectives}: penalize overconfident or
+underconfident posteriors directly, not just cross-entropy.
+
+\item \textbf{Grounding objectives}: reward outputs that are verifiable
+against a declared knowledge base.
+
+\item \textbf{BP consistency objectives}: penalize violations of the BP
+fixed-point equations across layers. If beliefs at layer $l+1$ are
+inconsistent with what BP would predict given beliefs at layer $l$,
+penalize that divergence.
+\end{itemize}
+
+\subsection*{The Uniqueness Theorem as a Training Target}
+
+The companion paper proves a uniqueness result: exact posteriors uniquely
+force BP weights. This means there is a well-defined target for training
+--- the weights that implement exact BP --- and the question is how well
+current training objectives approach it.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Gradient descent finds approximate BP weights & Empirical observation \\
+Calibration objectives would improve reliability & Architectural proposal \\
+BP consistency training would enforce layer-wise calibration & Architectural proposal \\
+Uniqueness theorem gives a well-defined training target & Direct consequence \\
+\bottomrule
+\end{tabular}
+\end{center}

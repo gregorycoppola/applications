@@ -1,0 +1,41 @@
+\section{Agents and the BP Vocabulary}
+\label{sec:agents}
+
+An LLM agent is typically described as: perception $\to$ reasoning $\to$
+action, iterated. This description is functional but not formal. The BP
+framework provides a formal vocabulary for describing each component ---
+not a proof that agents are Bayesian networks in every mechanistic detail,
+but a claim that the BP language maps naturally onto agent components and
+may provide useful formal tools.
+
+Under this interpretation: perception can be described as evidence
+injection; reasoning as BP inference; action as decision inference over
+the posterior; memory as persistent factor graph state; and tool calls as
+factor graph queries. Whether these correspondences are exact or approximate
+depends on how grounded the underlying factor graph is. For an ungrounded
+LLM, they are interpretive. For a grounded transformer operating over a
+declared QBBN, they become formal.
+
+\subsection*{The QBBN as the Logic Layer}
+
+The structured reasoning connecting perception to action can be formalized
+as a QBBN with AND/OR factor structure. The LLM provides neural inference
+capacity; the QBBN provides logical structure that makes reasoning
+compositional and verifiable. This suggests a hybrid architecture where
+every component is described in the same probabilistic language. Whether
+this can be built and scaled is an open research question.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+BP vocabulary maps onto agent components & Mechanistic interpretation \\
+LLM reasoning is BP inference & Empirical hypothesis \\
+Grounded agent loop has formal BP account & Architectural proposal \\
+Formal verification of agent steps is possible & Speculative extension \\
+\bottomrule
+\end{tabular}
+\end{center}

@@ -1,0 +1,49 @@
+\section{Hallucination Has a Formal Definition}
+\label{sec:hallucination}
+
+Hallucination is typically described informally: the model says something
+false or unsupported. This is a behavioral description, not a mechanistic
+one. It gives no account of why hallucination happens or what would prevent
+it.
+
+\subsection*{The BP Definition}
+
+The BP framework provides a formal definition: a model hallucinates when
+its output beliefs diverge from the correct posterior given the evidence.
+For a grounded transformer with a declared ontology and verifier, this
+divergence is measurable:
+\[
+b(j) \neq P_{\mathrm{true}}(j),
+\]
+where $P_{\mathrm{true}}$ is the correct posterior induced by the knowledge
+base and observed evidence.
+
+For an ungrounded transformer, the comparison is not well-defined because
+there is no formally declared ground truth. Hallucination in ungrounded
+models is not a numerical error in the inference procedure --- it is a
+consequence of operating without a fully specified and verifiable grounding
+structure.
+
+\subsection*{What Grounding Requires}
+
+A fully grounded transformer would need: a declared concept space, a
+declared relational structure, a grounding procedure mapping natural
+language to the declared system, and a verification mechanism. Retrieval-
+augmented generation is a partial form of grounding: it temporarily
+constrains the inference space but does not provide persistent ontological
+structure or a verifier.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Grounded BP systems have a formal hallucination definition & Direct consequence \\
+Ungrounded models lack a formal correctness criterion & Direct consequence \\
+Hallucination requires grounding to formally eliminate & Mechanistic interpretation \\
+Scaling alone cannot eliminate hallucination & Mechanistic interpretation \\
+\bottomrule
+\end{tabular}
+\end{center}

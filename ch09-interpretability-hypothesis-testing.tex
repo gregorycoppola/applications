@@ -1,0 +1,55 @@
+\section{Interpretability as Hypothesis Testing}
+\label{sec:interp-hypothesis}
+
+Mechanistic interpretability is currently largely exploratory. The BP
+framework changes this: it generates specific, testable predictions about
+what trained transformers should look like at the weight level.
+
+\subsection*{Specific Predictions}
+
+\begin{itemize}
+\item Boolean-AND heads should have approximately rank-1 Q/K circuits
+consistent with \texttt{projectDim}-style matching.
+\item The dominant singular vector of the Q/K circuit should correspond to
+a monosemantic SAE feature.
+\item The V circuit should show \texttt{crossProject}-style routing from a
+belief-encoding dimension to a scratch-slot dimension.
+\item $W_1$ rows of the FFN should cluster by input SAE feature.
+\item $W_2$ columns should correspond to interpretable belief updates.
+\item The relationship between input and output SAE features for each FFN
+unit should be interpretable as a conditional probability table entry.
+\end{itemize}
+
+These are specific structural claims that can be confirmed or falsified by
+inspecting the weights of a trained model with a good SAE.
+
+\subsection*{What a Negative Result Would Mean}
+
+If boolean-AND heads do not show rank-1 Q/K structure, that would falsify
+the constructive BP account for those heads --- not just complicate it. The
+BP framework is a genuine scientific hypothesis because it makes predictions
+that could be wrong.
+
+\subsection*{The Closing Experiment}
+
+Take a model with a trained SAE. Identify boolean-AND heads by behavior.
+Project the Q/K matrix onto the SAE feature basis. Check if the dominant
+component corresponds to a monosemantic feature. Check if the V circuit
+routes from a belief dimension to a scratch slot. Check if input/output SAE
+feature pairs for active FFN units are interpretable as conditional
+relationships. If this succeeds, the implicit factor graph is legible.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+BP predicts rank-1 Q/K structure in AND heads & Empirical hypothesis \\
+SAE features correspond to factor graph nodes & Empirical hypothesis \\
+Factor graph is legible from weights + SAE & Empirical hypothesis \\
+Negative SAE result would falsify BP account & Direct consequence \\
+\bottomrule
+\end{tabular}
+\end{center}

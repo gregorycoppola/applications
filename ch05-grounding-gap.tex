@@ -1,0 +1,47 @@
+\section{The Grounding Gap}
+\label{sec:grounding-gap}
+
+There are two distinct kinds of reliability a language model can have.
+\emph{Empirical reliability} means the model produces correct outputs most
+of the time on a given distribution, as measured by benchmarks or human
+evaluation. \emph{Formal reliability} means the model's outputs are
+guaranteed correct relative to a specified knowledge base and ontology, by
+a verifiable proof.
+
+Current LLMs have empirical reliability. Grounded BP systems --- transformers
+operating over a declared factor graph with a verifier --- have formal
+reliability in restricted settings. The gap between these two is the
+grounding gap.
+
+\subsection*{Why Scaling Does Not Close It}
+
+Scaling improves empirical reliability monotonically. But it does not
+create a declared ontology, a finite concept space, or a verifier. A 405B
+parameter model with no grounding structure cannot provide formal
+correctness guarantees, regardless of its benchmark performance.
+
+The grounding gap is not a quantitative gap that more parameters will close.
+It is a structural gap between two different kinds of system.
+
+\subsection*{What Would Close It}
+
+Closing the grounding gap requires building systems that combine neural
+inference (the transformer's BP computation) with symbolic grounding (a
+declared ontology and verifier). This is the QBBN program. Whether it can
+be scaled to general-purpose language understanding is the central open
+problem.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+Two kinds of reliability are distinct & Conceptual distinction \\
+Grounded BP systems have formal reliability & Direct consequence \\
+Scaling does not close the grounding gap & Mechanistic interpretation \\
+QBBN hybrid closes the gap & Architectural proposal \\
+\bottomrule
+\end{tabular}
+\end{center}

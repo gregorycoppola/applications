@@ -1,0 +1,67 @@
+\section{Introduction}
+\label{sec:introduction}
+
+The companion paper~\cite{coppola2026transformers} proves that a sigmoid
+transformer can exactly realize belief propagation (BP) under a constructive
+weight mapping. This is not a loose analogy or a high-level functional
+similarity: the forward pass implements the BP update equations directly,
+with residual streams as belief states, attention as evidence gathering, and
+feed-forward networks as belief updates.
+
+The present paper asks: what follows from taking that result seriously? The
+applications range from theoretical (a mechanistic account of why LLMs work)
+to practical (grounding strategies, interpretability predictions, agent
+design) to open research directions (calibrated uncertainty, factor graph
+recovery, grounded planning systems).
+
+\subsection*{Levels of Analysis}
+
+The applications in this paper operate at several distinct levels that
+should not be conflated:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Level & Description & Example \\
+\midrule
+Exact constructive & Formally verified theorem & Sigmoid transformer realizes exact BP \\
+Direct consequence & Follows from the theorem & Grounded BP has no hallucination \\
+Mechanistic interpretation & Component-level account & Attention = evidence gathering \\
+Empirical hypothesis & Testable prediction & AND heads have rank-1 Q/K circuits \\
+Architectural proposal & Design suggestion & Grounded transformer + QBBN hybrid \\
+Speculative extension & Interpretive extrapolation & Planning as MDP inference \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Each section marks the epistemic status of its claims explicitly.
+
+\subsection*{Map of Literatures}
+
+Five independent research programs have converged on related pictures of
+transformer computation. The BP result provides a common language for
+organizing their findings:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Literature & Main Idea & BP Connection \\
+\midrule
+Mechanistic interpretability & Circuits and routing heads & Message passing structure \\
+In-context learning & Bayesian updating from examples & Posterior inference per forward pass \\
+Graph neural networks & Node message passing & Explicit graph BP \\
+Sparse autoencoders & Monosemantic semantic features & Latent factor graph nodes \\
+RAG / tool use & External evidence injection & Conditioning on observed evidence \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{What This Paper Is Not Claiming}
+
+The formal theorem is about sigmoid transformers under a specific
+constructive weight mapping. Production transformers use SwiGLU or GeLU,
+not sigmoid. The theorem establishes that the architecture \emph{can}
+implement exact BP; whether any particular trained model does is an
+empirical question. The applications that follow are interpretations,
+proposals, and hypotheses motivated by the result --- not derived
+consequences of it, except where explicitly noted.

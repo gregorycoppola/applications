@@ -1,0 +1,39 @@
+\section{What This Does Not Prove}
+\label{sec:limitations}
+
+The result that sigmoid transformers can exactly realize belief propagation
+is formal and verified. The applications that follow range from
+well-established to speculative. This section states clearly what the
+theory does not prove.
+
+\subsection*{The Theorem Is About Sigmoid Transformers}
+
+Production transformers use SwiGLU or GeLU, not sigmoid activation. The
+exact BP equivalence holds for sigmoid transformers under the constructive
+weight mapping. For production transformers, the architecture is compatible
+with BP-like computation and gradient descent finds approximately correct
+BP solutions empirically, but exact equivalence is not established.
+
+\subsection*{Attention Is Not Literally Logical Conjunction}
+
+The AND/OR framing is mechanistically motivated but is an interpretation,
+not a theorem about arbitrary trained attention heads. Roughly 90\% of
+heads across studied models fall into the boolean-AND, continuous-OR, and
+hub categories. The remaining $\sim$10\% are genuinely uncharacterized.
+
+\subsection*{The Factor Graph Is Not Directly Observable}
+
+The implicit factor graph is encoded in learned weights, not explicitly
+declared. Current SAEs cover a small fraction of the residual stream's
+representational capacity. Factor graph edges have not been systematically
+recovered. The claim that SAE features correspond to factor graph nodes is
+an empirical hypothesis with supporting evidence, not a proven theorem.
+
+\subsection*{What Would Falsify the Core Interpretation}
+
+The BP interpretation would be significantly weakened if: boolean-AND heads
+do not exhibit rank-1 Q/K structure under SAE analysis; SAE features fail
+to organize into stable dependency structure; FFN updates are not locally
+interpretable as belief updates; deeper layers do not improve iterative
+reasoning behavior; or gradient descent does not find BP-like solutions on
+clean synthetic tasks.

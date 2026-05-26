@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{booktabs}
+\geometry{margin=1.2in}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\logit}{logit}
+\newcommand{\updateBelief}{\mathrm{updateBelief}}
+\newcommand{\R}{\mathbb{R}}
+\title{Applications of the Bayesian Network Interpretation of Transformers}
+\author{Greg Coppola}
+\date{2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The companion paper~\cite{coppola2026transformers} proves that a sigmoid
+transformer can exactly realize belief propagation under a constructive
+weight mapping. This paper develops the applications and implications of
+that result. We organize them across six domains: theoretical foundations
+(why LLMs work, scaling laws, formal reasoning), grounding and hallucination,
+agents and planning, mechanistic interpretability, training objectives, and
+efficiency. Each application is marked by its epistemic status --- formal
+consequence, mechanistic interpretation, empirical hypothesis, architectural
+proposal, or speculative extension --- so that the reader can calibrate
+confidence accordingly. The paper concludes with an explicit account of
+what the theory does not prove and a research roadmap for the open problems.
+\end{abstract}
+\tableofcontents
+\newpage
+\part{Introduction and Framework}
+\input{ch00-introduction}
+\part{Theoretical Consequences}
+\input{ch01-why-llms-work}
+\input{ch02-scaling-laws}
+\input{ch03-formal-reasoning}
+\part{Grounding and Hallucination}
+\input{ch04-hallucination}
+\input{ch05-grounding-gap}
+\part{Agents and Planning}
+\input{ch06-agents}
+\input{ch07-planning}
+\input{ch08-multi-agent}
+\part{Interpretability}
+\input{ch09-interpretability-hypothesis-testing}
+\input{ch10-sae-features}
+\part{Training and Efficiency}
+\input{ch11-training-objectives}
+\input{ch12-sparse-inference}
+\part{Limitations and Open Problems}
+\input{ch13-limitations}
+\input{ch14-research-roadmap}
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}

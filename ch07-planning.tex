@@ -1,0 +1,55 @@
+\section{Planning as Inference}
+\label{sec:planning}
+
+Planning is the problem of selecting actions to achieve goals. The standard
+formal model is the Markov Decision Process (MDP): states $S$, actions $A$,
+transition probabilities $P(s' | s, a)$, reward $R(s,a)$, and discount
+$\gamma$. MDPs can be represented as dynamic Bayesian networks. Policy
+evaluation is inference; policy improvement is optimization over the
+inferred value function.
+
+\subsection*{The Bellman Equation as Message Passing}
+
+The Bellman equation
+\[
+V(s) = \max_a \left[ R(s,a) + \gamma \sum_{s'} P(s'|s,a)\, V(s') \right]
+\]
+can be interpreted as a message passing update: the value at state $s$ is
+computed from the values of its neighbors, weighted by transition
+probabilities. Under this interpretation, a transformer running BP over
+an MDP factor graph computes value estimates iteratively across layers,
+with each layer corresponding to one step of policy evaluation. This is
+a mechanistic interpretation, not a proven equivalence for arbitrary
+trained transformers.
+
+\subsection*{Chain-of-Thought as Extended Inference}
+
+When an LLM reasons about future states in a chain-of-thought, it is
+plausibly approximating this process. One interpretation of why
+chain-of-thought helps planning: it provides more effective rounds of
+inference by externalizing intermediate estimates into the context window.
+This is consistent with the BP interpretation but not uniquely predicted
+by it.
+
+\subsection*{Grounded Planning}
+
+A grounded planning system would combine a formally declared state space
+(QBBN propositions), learned or specified transition probabilities (OR gate
+weights), a BP inference engine (the transformer), and a verifier. Whether
+this architecture can be built and scaled is an open research question.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+MDPs can be represented as dynamic Bayes nets & Established (standard formalism) \\
+Bellman equation resembles BP message passing & Mechanistic interpretation \\
+Chain-of-thought provides more inference rounds & Empirical hypothesis \\
+Ungrounded LLMs fail at long-horizon planning & Empirical observation \\
+Grounded transformer enables verified planning & Architectural proposal \\
+\bottomrule
+\end{tabular}
+\end{center}

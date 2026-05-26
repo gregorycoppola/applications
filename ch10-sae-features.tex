@@ -1,0 +1,41 @@
+\section{SAE Features as Factor Graph Nodes}
+\label{sec:sae-features}
+
+FFN hidden units are not the right unit for understanding the implicit
+factor graph. A single hidden unit may participate in multiple factor
+relationships via superposition, and a single factor relationship may
+require multiple hidden units to implement accurately with non-sigmoid
+activations.
+
+The right unit is the SAE feature. Each monosemantic SAE feature ---
+one that activates for a single coherent concept --- corresponds to one
+node in the implicit factor graph. The feature direction in residual stream
+space is where the belief value for that concept lives.
+
+\subsection*{The Factor Graph is Readable in Principle}
+
+Given a complete SAE, the full implicit factor graph is readable in
+principle: factor graph nodes are monosemantic SAE features; edges are $W_1$
+rows that respond to pairs of input features whose $W_2$ columns write to
+output features; factor potentials are the learned weights connecting input
+to output features.
+
+Current SAEs cover a small fraction of the residual stream's
+representational capacity. As coverage improves, the factor graph becomes
+more legible. The BP result gives interpretability research a specific
+target: complete the SAE, then read the graph.
+
+\subsection*{Epistemic Status}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Claim & Status \\
+\midrule
+SAE features correspond to factor graph nodes & Empirical hypothesis \\
+Factor graph edges are readable from W1/W2 & Empirical hypothesis \\
+Complete SAE would make factor graph legible & Architectural proposal \\
+Golden Gate Claude demonstrates evidence injection & Empirical observation \\
+\bottomrule
+\end{tabular}
+\end{center}
