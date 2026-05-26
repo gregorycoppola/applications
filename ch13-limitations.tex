@@ -11,23 +11,28 @@ theory does not prove.
 Production transformers use SwiGLU or GeLU, not sigmoid activation. The
 exact BP equivalence holds for sigmoid transformers under the constructive
 weight mapping. For production transformers, the architecture is compatible
-with BP-like computation and gradient descent finds approximately correct
-BP solutions empirically, but exact equivalence is not established.
+with BP-like computation and in synthetic experiments gradient descent
+finds approximately correct BP solutions, but exact equivalence is not
+established for arbitrary trained models.
 
 \subsection*{Attention Is Not Literally Logical Conjunction}
 
 The AND/OR framing is mechanistically motivated but is an interpretation,
-not a theorem about arbitrary trained attention heads. Roughly 90\% of
-heads across studied models fall into the boolean-AND, continuous-OR, and
-hub categories. The remaining $\sim$10\% are genuinely uncharacterized.
+not a theorem about arbitrary trained attention heads. Across three studied
+model families (GPT-2 small, GPT-2 medium, Qwen~2.5 0.5B), a substantial
+fraction of heads fall into the boolean-AND, continuous-OR, and hub
+categories. The remainder exhibit context-dependent behavior not yet
+characterized by the framework. Reproducibility and generalization to other
+model families remain to be established.
 
 \subsection*{The Factor Graph Is Not Directly Observable}
 
 The implicit factor graph is encoded in learned weights, not explicitly
 declared. Current SAEs cover a small fraction of the residual stream's
 representational capacity. Factor graph edges have not been systematically
-recovered. The claim that SAE features correspond to factor graph nodes is
-an empirical hypothesis with supporting evidence, not a proven theorem.
+recovered. The claim that SAE features are natural candidates for factor
+graph nodes is an empirical hypothesis with supporting evidence, not a
+proven theorem.
 
 \subsection*{What Would Falsify the Core Interpretation}
 

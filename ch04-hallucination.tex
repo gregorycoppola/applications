@@ -34,11 +34,11 @@ Grounding does not eliminate all possible error. Even a formally grounded
 system can have an incomplete ontology, incorrect premises, ambiguous
 mappings from natural language, or approximation errors in inference.
 What grounding provides is not a guarantee of truth but a guarantee of
-\emph{verifiable correctness relative to a declared ontology}: outputs can
-be checked against the knowledge base, and failures can be traced to
-specific premises or inference steps. This is a weaker but more honest
-claim --- and still substantially stronger than what ungrounded systems
-can provide.
+\emph{formally verifiable evaluation of correctness claims relative to a
+declared ontology}: outputs can be checked against the knowledge base,
+and failures can be traced to specific premises or inference steps. This
+is a weaker but more honest claim --- and still substantially stronger than
+what ungrounded systems can provide.
 
 Retrieval-augmented generation is a partial form of grounding: it
 temporarily constrains the inference space but does not provide persistent
@@ -51,7 +51,7 @@ ontological structure or a verifier.
 \toprule
 Claim & Status \\
 \midrule
-Grounded BP permits formally verifiable correctness & Direct consequence \\
+Grounded BP permits formally verifiable evaluation of correctness & Direct consequence \\
 Grounding eliminates all hallucination & Explicitly not claimed \\
 Ungrounded models lack a formal correctness criterion & Direct consequence \\
 Hallucination requires grounding to formally address & Mechanistic interpretation \\

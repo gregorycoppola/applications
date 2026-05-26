@@ -1,12 +1,14 @@
 \section{Sparse Inference and Pruning}
 \label{sec:efficiency}
 
-The implicit factor graph is sparse: each node has only a few neighbors,
-and most conditional relationships are zero or near-zero. If the sparse
-factor graph structure can be identified --- which SAE features matter for
-a given task, which AND connections are active, which OR gates are relevant
---- the rest can be skipped. This is structured pruning with a theoretical
-justification.
+The implicit factor graph appears to exhibit sparse effective dependency
+structure: each node has only a few strong neighbors, and most conditional
+relationships are weak or near-zero. If this structure can be identified
+--- which SAE features matter for a given task, which AND connections are
+active, which OR gates are relevant --- the rest can be skipped. This is
+structured pruning with a theoretical justification, though the density
+of internal superposition means the effective sparsity at the hidden-unit
+level may be less than at the factor graph level.
 
 \subsection*{Task-Specific Factor Graphs}
 
@@ -20,9 +22,9 @@ approximating.
 
 Knowledge distillation can be understood as factor graph compression:
 finding a smaller factor graph that approximates the posteriors of the
-larger one. The BP framework gives a principled objective for distillation:
-minimize KL divergence between the posteriors of the teacher and student
-factor graphs, not just between their output distributions.
+larger one. The BP framework suggests a principled objective for
+distillation: minimize KL divergence between the posteriors of the teacher
+and student factor graphs, not just between their output distributions.
 
 \subsection*{Epistemic Status}
 
@@ -31,7 +33,7 @@ factor graphs, not just between their output distributions.
 \toprule
 Claim & Status \\
 \midrule
-Implicit factor graph is sparse & Mechanistic interpretation \\
+Implicit factor graph has sparse effective dependency structure & Mechanistic interpretation \\
 Task-specific subgraph activation motivates sparse computation & Mechanistic interpretation \\
 MoE approximates task-specific factor graph routing & Mechanistic interpretation \\
 Distillation as factor graph compression & Architectural proposal \\
